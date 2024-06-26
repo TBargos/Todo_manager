@@ -5,17 +5,28 @@
 {% block content %}
     <!-- Cписок задач c кнопкой добавления-->
     <h1>Задачи</h1>
-    <form method="get">
-        <input required type="text" maxlength=80>
-        <button>Добавить задачу</button>
+    <form method="post" action="">
+        <input required type="text" maxlength=80 name="newtask">
+        <button type="submit">Добавить задачу</button>
     </form>
     <ul>
         {% for task in actual_tasks %}
-            <li>{{ task.taskname }}</li>
+            <li>
+                <form method="post"> 
+                    {{ task.taskname }}
+                    <button name="taskoff" value={{ task.id }}>
+                        Завершить
+                    </button>
+                </form>
+            </li>
         {% endfor %}
     </ul>
+    
     <!-- Завершённые задачи -->
     <h1>Завершённые задачи</h1>
+    <form method="post">
+        <button name="clear_finished_tasks" value=True>Очистить</button>
+    </form>
     <ul>
         {% for task in completed_tasks %}
             <li>{{ task.taskname }}</li>
